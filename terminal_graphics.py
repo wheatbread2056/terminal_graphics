@@ -1,4 +1,4 @@
-# terminal_graphics version 0.2
+# terminal_graphics version 0.2a
 # a simple way to show graphics in the terminal, using only text characters and colors
 
 from colorama import Fore as f, Back as b, just_fix_windows_console
@@ -26,7 +26,8 @@ def plot(x,y,c): # modify a pixel on the screen to a specific color (0-16) or -1
     global SCREEN
     if y < 0 or y > sy-1 or x < 0 or x > sx:
         print(f'attempted to plot at ({x},{y}) which is outside ({sx},{sy})')
-    SCREEN[y][x] = c
+    else:
+        SCREEN[y][x] = c
 
 def char(x,y,t,c): # plot a text character onto the screen
     if not len(t) == 1:
