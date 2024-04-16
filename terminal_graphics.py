@@ -1,4 +1,4 @@
-# terminal_graphics version 0.2c
+# terminal_graphics version 0.2d
 # a simple way to show graphics in the terminal, using only text characters and colors
 
 from colorama import Fore as f, Back as b, just_fix_windows_console
@@ -46,8 +46,7 @@ def string(x,y,t,c): # puts a string on the screen
     global CSCREEN
     a = 0
     for i in range(x,x+len(t)):
-        TSCREEN[y][i] = t[a]
-        CSCREEN[y][i] = c
+        char(i,y,t[a],c)
         a += 1
 
 def rect(x1,y1,x2,y2,c): # draw a rectangle
