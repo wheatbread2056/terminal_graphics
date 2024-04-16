@@ -1,4 +1,4 @@
-# terminal_graphics version 0.2a
+# terminal_graphics version 0.2b
 # a simple way to show graphics in the terminal, using only text characters and colors
 
 from colorama import Fore as f, Back as b, just_fix_windows_console
@@ -64,11 +64,12 @@ def rect(x1,y1,x2,y2,c): # draw a rectangle
 
 def draw(clr=True): # draw to the screen
     if clr == True:
-        os.system('cls')
+        print('\033[A'*sy)
     for i in range(sy):
+        p = ''
         for j in range(sx):
             if SCREEN[i][j] == -1:
-                print(' ',end='')
+                p+=' '
             else:
-                print(bc[SCREEN[i][j]]+c[CSCREEN[i][j]]+TSCREEN[i][j],end='')
-        print(c[0]+bc[0]) # end line
+                p+=bc[SCREEN[i][j]]+c[CSCREEN[i][j]]+TSCREEN[i][j]
+        print(p+c[0]+bc[0])
