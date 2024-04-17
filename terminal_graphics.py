@@ -1,9 +1,10 @@
-# terminal_graphics version 0.2d
+# terminal_graphics version 0.2e
 # a simple way to show graphics in the terminal, using only text characters and colors
 
 from colorama import Fore as f, Back as b, just_fix_windows_console
 import time
 import os
+import random
 just_fix_windows_console()
 
 sx, sy = 0, 0
@@ -22,7 +23,7 @@ def gen_screen(x,y): # clear the previous screen array and generate a new one
         crow = [2] * x
         SCREEN.append(row); TSCREEN.append(trow); CSCREEN.append(crow)
 
-def plot(x,y,c): # modify a pixel on the screen to a specific color (0-16) or -1 for nothing
+def plot(x,y,c): # modify a pixel on the screen to a specific color (0-16)
     global SCREEN
     if y < 0 or y > sy-1 or x < 0 or x > sx-1:
         print(f'attempted to plot at ({x},{y}) which is outside ({sx},{sy})')
@@ -65,13 +66,12 @@ def rect(x1,y1,x2,y2,c): # draw a rectangle
             plot(j, i, c)
 
 def draw(clr=True): # draw to the screen
+    cur = 0 # current pixel
     if clr == True:
         print('\033[A'*sy)
     for i in range(sy):
-        p = ''
         for j in range(sx):
-            if SCREEN[i][j] == -1:
-                p+=' '
-            else:
-                p+=bc[SCREEN[i][j]]+c[CSCREEN[i][j]]+TSCREEN[i][j]
-        print(p+c[0]+bc[0])
+            cur+=1
+            if not cur > (sx*sy)-sx:
+                print(bc[SCREEN[i][j]]+c[CSCREEN[i][j]]+TSCREEN[i][j],end='')     
+        print(c[0]+bc[0],end='')
