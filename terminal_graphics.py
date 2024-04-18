@@ -1,4 +1,4 @@
-# terminal_graphics version 0.2e
+# terminal_graphics version 0.2f
 # a simple way to show graphics in the terminal, using only text characters and colors
 
 from colorama import Fore as f, Back as b, just_fix_windows_console
@@ -65,6 +65,31 @@ def rect(x1,y1,x2,y2,c): # draw a rectangle
         for j in range(sx, bx+1):
             plot(j, i, c)
 
+def line(x1, y1, x2, y2, c):  # draw a line using Bresenham's line algorithm (thanks chatgpt)
+    global SCREEN
+    dx = abs(x2 - x1)
+    dy = abs(y2 - y1)
+    sx = -1 if x1 > x2 else 1
+    sy = -1 if y1 > y2 else 1
+    if dy < dx:
+        err = dx / 2.0
+        y = y1
+        for x in range(x1, x2 + sx, sx):
+            plot(x, y, c)
+            err -= dy
+            if err < 0:
+                y += sy
+                err += dx
+    else:
+        err = dy / 2.0
+        x = x1
+        for y in range(y1, y2 + sy, sy):
+            plot(x, y, c)
+            err -= dx
+            if err < 0:
+                x += sx
+                err += dy
+
 def draw(clr=True): # draw to the screen
     cur = 0 # current pixel
     if clr == True:
@@ -72,6 +97,5 @@ def draw(clr=True): # draw to the screen
     for i in range(sy):
         for j in range(sx):
             cur+=1
-            if not cur > (sx*sy)-sx:
-                print(bc[SCREEN[i][j]]+c[CSCREEN[i][j]]+TSCREEN[i][j],end='')     
-        print(c[0]+bc[0],end='')
+            if not cur > (sx*sy):
+                print(bc[SCREEN[i][j]]+c[CSCREEN[i][j]]+TSCREEN[i][j],end='')
