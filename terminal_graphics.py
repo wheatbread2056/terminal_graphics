@@ -90,6 +90,11 @@ def line(x1, y1, x2, y2, c):  # draw a line using Bresenham's line algorithm (th
                 x += sx
                 err += dy
 
+def tri(x1,y1,x2,y2,x3,y3,c): # draw a triangle. way too many arguments
+    line(x1,y1,x2,y2,c)
+    line(x2,y2,x3,y3,c)
+    line(x3,y3,x1,y1,c)
+
 def draw(clr=True): # draw to the screen
     cur = 0 # current pixel
     if clr == True:
@@ -99,3 +104,4 @@ def draw(clr=True): # draw to the screen
             cur+=1
             if not cur > (sx*sy):
                 print(bc[SCREEN[i][j]]+c[CSCREEN[i][j]]+TSCREEN[i][j],end='')
+        print(bc[0],c[0])
