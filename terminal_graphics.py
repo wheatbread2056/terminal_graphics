@@ -1,10 +1,8 @@
 # terminal_graphics version 0.2f
 # a simple way to show graphics in the terminal, using only text characters and colors
 
+# why does this use colorama
 from colorama import Fore as f, Back as b, just_fix_windows_console
-import time
-import os
-import random
 just_fix_windows_console()
 
 sx, sy = 0, 0
@@ -76,7 +74,7 @@ def line(x1, y1, x2, y2, c):  # draw a line using Bresenham's line algorithm (th
         y = y1
         for x in range(x1, x2 + sx, sx):
             plot(x, y, c)
-            err -= dy
+            err -= dy # 11/25/24   what the fuck does this mean
             if err < 0:
                 y += sy
                 err += dx
