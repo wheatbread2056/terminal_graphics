@@ -1,5 +1,5 @@
 from getkey import getkey, keys
-import tgrap, os
+import terminal_graphics as tgrap, os
 
 xs, ys, xe, ye = 0, 0, 1, 0
 x_size, y_size = 2, 1
